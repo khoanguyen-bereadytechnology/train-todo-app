@@ -51,7 +51,7 @@
             
             <div class="flex flex-row gap-4">
                 <div>
-                    <div x-text="'To dos: ' + getNTodo()"></div>
+                    <div x-text="'To dos: ' + todos.length"></div>
                 </div>
                 <div class="border border-1"></div>
                 <div>
@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="mt-5">
-                <div class="mt-1 mb-1" x-text="getNTodo() + ' more to go!'"></div>
+                <div class="mt-1 mb-1" x-text="isAllCompleted() ? 'Congrats you finished your list' : getNTodo() + ' more to go!'"></div>
                 <div class="flex flex-col gap-4">
                     <template x-for="(todo, index) in todos" :key="index">
                         <div :id="$id('todo')" x-data="{id: index}"  class="flex border-1 rounded hover:bg-gray-100 transition">
@@ -117,6 +117,9 @@
                 },
                 getNTodoDone(){
                     return this.todos.filter(todo => todo.isDone).length;
+                },
+                isAllCompleted(){
+                    return this.getNTodo() == this.getNTodoDone();
                 }
             }));
         });
