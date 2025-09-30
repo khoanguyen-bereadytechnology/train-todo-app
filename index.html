@@ -16,39 +16,42 @@
 </head>
 
 <body>
-    <div x-data = "todos">
-        
+    <div x-data="todos">
+
         <div
-            class="absolute bg-white hover:scale-101 transition rounded-xl bottom-10 inset-x-50 shadow-[0px_0px_40px_5px_rgba(0,0,0,0.2)]">
-            <form @submit.prevent="add(document.getElementById('inp-task').value); document.getElementById('inp-task').value='';" class="flex flex-row mb-1">
-                <input type="text" id="inp-task" class="p-4 flex-1 focus:outline-none" placeholder="Type to do">
-                <button type="submit" class="m-3 cursor-pointer"">
-                    <svg viewBox="0 0 32 32" class="transition hover:text-blue-900 hover:scale-90 w-8 h-8" version="1.1"
-                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" fill="currentColor">
-                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                        <g id="SVGRepo_iconCarrier">
-                            <title>plus-circle</title>
-                            <desc>Created with Sketch Beta.</desc>
-                            <defs> </defs>
-                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"
-                                sketch:type="MSPage">
-                                <g id="Icon-Set" sketch:type="MSLayerGroup"
-                                    transform="translate(-464.000000, -1087.000000)" fill="currentColor">
-                                    <path
-                                        d="M480,1117 C472.268,1117 466,1110.73 466,1103 C466,1095.27 472.268,1089 480,1089 C487.732,1089 494,1095.27 494,1103 C494,1110.73 487.732,1117 480,1117 L480,1117 Z M480,1087 C471.163,1087 464,1094.16 464,1103 C464,1111.84 471.163,1119 480,1119 C488.837,1119 496,1111.84 496,1103 C496,1094.16 488.837,1087 480,1087 L480,1087 Z M486,1102 L481,1102 L481,1097 C481,1096.45 480.553,1096 480,1096 C479.447,1096 479,1096.45 479,1097 L479,1102 L474,1102 C473.447,1102 473,1102.45 473,1103 C473,1103.55 473.447,1104 474,1104 L479,1104 L479,1109 C479,1109.55 479.447,1110 480,1110 C480.553,1110 481,1109.55 481,1109 L481,1104 L486,1104 C486.553,1104 487,1103.55 487,1103 C487,1102.45 486.553,1102 486,1102 L486,1102 Z"
-                                        id="plus-circle" sketch:type="MSShapeGroup"> </path>
-                                </g>
+            class="absolute bg-white hover:scale-101 transition rounded-xl p-4 bottom-10 inset-x-50 shadow-[0px_0px_40px_5px_rgba(0,0,0,0.2)]">
+            <form
+                @submit.prevent="add(document.getElementById('inp-task').value); document.getElementById('inp-task').value='';"
+                class="flex flex-row mb-1">
+                <input type="text" id="inp-task" class="p-2 flex-1 focus:outline-none border"
+                    placeholder="Add to do item">
+                <button type="submit" class="m-1 cursor-pointer"">
+                    <svg viewBox=" 0 0 32 32"
+                    class="transition text-gray-600 hover:text-blue-900 hover:scale-90 w-5 h-5" version="1.1"
+                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" fill="currentColor">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <title>plus-circle</title>
+                        <desc>Created with Sketch Beta.</desc>
+                        <defs> </defs>
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"
+                            sketch:type="MSPage">
+                            <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-464.000000, -1087.000000)"
+                                fill="currentColor">
+                                <path
+                                    d="M480,1117 C472.268,1117 466,1110.73 466,1103 C466,1095.27 472.268,1089 480,1089 C487.732,1089 494,1095.27 494,1103 C494,1110.73 487.732,1117 480,1117 L480,1117 Z M480,1087 C471.163,1087 464,1094.16 464,1103 C464,1111.84 471.163,1119 480,1119 C488.837,1119 496,1111.84 496,1103 C496,1094.16 488.837,1087 480,1087 L480,1087 Z M486,1102 L481,1102 L481,1097 C481,1096.45 480.553,1096 480,1096 C479.447,1096 479,1096.45 479,1097 L479,1102 L474,1102 C473.447,1102 473,1102.45 473,1103 C473,1103.55 473.447,1104 474,1104 L479,1104 L479,1109 C479,1109.55 479.447,1110 480,1110 C480.553,1110 481,1109.55 481,1109 L481,1104 L486,1104 C486.553,1104 487,1103.55 487,1103 C487,1102.45 486.553,1102 486,1102 L486,1102 Z"
+                                    id="plus-circle" sketch:type="MSShapeGroup"> </path>
                             </g>
                         </g>
+                    </g>
                     </svg>
                 </button>
             </form>
         </div>
 
         <div class="mt-5 container m-auto sm:max-h-80 lg:max-h-110 overflow-y-auto">
-            
             <div class="flex flex-row gap-4">
                 <div>
                     <div x-text="'To dos: ' + todos.length"></div>
@@ -59,35 +62,54 @@
                 </div>
             </div>
             <div class="mt-5">
-                <div class="mt-1 mb-1" x-text="isAllCompleted() ? 'Congrats you finished your list' : getNTodo() + ' more to go!'"></div>
+                <div class="mt-1 mb-1"
+                    x-text="getNTodo()==0 ? 'Congrats you finished your list' : getNTodo() + ' more to go!'"></div>
                 <div class="flex flex-col gap-4">
                     <template x-for="(todo, index) in todos" :key="index">
-                        <div :id="$id('todo')" x-data="{id: index}"  class="flex border-1 rounded hover:bg-gray-100 transition">
+                        <div :id="$id('todo')" x-data="{id: index}"
+                            class="flex border-1 border-gray-300 rounded hover:bg-gray-100 transition">
                             <div class="ml-3 inline-flex items-center content-center">
                                 <label class="flex items-center cursor-pointer relative">
                                     <input :id="id" @click="toggle" type="checkbox" x-model="todo.isDone"
-                                        class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-slate-800 checked:border-slate-800"
-                                        />
+                                        class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded bg-gray-100 border border-slate-300 checked:bg-transparent checked:border-none" />
                                     <span
-                                        class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20"
+                                        class="absolute text-gray-500 opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+                                        <svg width="30px" height="30px" viewBox="0 0 24.00 24.00"
+                                            fill="currentColor" stroke="currentColor"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                stroke-linejoin="round"></g>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <title>i</title>
+                                                <g id="Complete">
+                                                    <g id="tick">
+                                                        <polyline points="6 14 9.6 19 20.3 5" fill="none"
+                                                            stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="1.848"></polyline>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                        <!-- <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20"
                                             fill="currentColor" stroke="currentColor" stroke-width="1">
                                             <path fill-rule="evenodd"
                                                 d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                                 clip-rule="evenodd"></path>
-                                        </svg>
+                                        </svg> -->
                                     </span>
                                 </label>
                             </div>
                             <label :for="id" x-text="todo.todo" class="flex-1 p-3">
-                                
+
                             </label>
-                            <div @click="remove" :id="index" class="flex-none m-1 cursor-pointer text-gray-300 text-xs self-start">
+                            <div @click="remove" :id="index"
+                                class="flex-none m-1 cursor-pointer text-gray-300 text-xs self-start">
                                 remove
                             </div>
                         </div>
                     </template>
-                    
+
 
                 </div>
             </div>
@@ -96,7 +118,7 @@
 
     <script>
         document.addEventListener('alpine:init', () => {
-            Alpine.data('todos', ()=> ({
+            Alpine.data('todos', () => ({
                 todos: Alpine.$persist([]),
                 add(todo) {
                     this.todos.push({
@@ -115,10 +137,10 @@
                 getNTodo() {
                     return this.todos.filter(todo => !todo.isDone).length;
                 },
-                getNTodoDone(){
+                getNTodoDone() {
                     return this.todos.filter(todo => todo.isDone).length;
                 },
-                isAllCompleted(){
+                isAllCompleted() {
                     return this.getNTodo() == this.getNTodoDone();
                 }
             }));
