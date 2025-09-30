@@ -52,26 +52,31 @@
         </div>
 
         <div class="mt-5 container m-auto sm:max-h-80 lg:max-h-110 overflow-y-auto">
-            <div class="flex flex-row gap-4">
-                <div>
-                    <div x-text="'To dos: ' + todos.length"></div>
+            <div class="grid grid-cols-2">
+                <div class="flex gap-2 font-bold items-center">
+                    <div x-text="'To Dos: ' + todos.length"></div>
+                    <div class="border border-1 border-gray-500 h-4"></div>
+                    <div x-text="'Completed: ' + getNTodoDone"></div>
                 </div>
-                <div class="border border-1"></div>
-                <div>
-                    <div x-text="'Completed: ' + getNTodoDone()"></div>
+                <div class="flex justify-end">
+                    <select x-bind="trigger" id="filter-box" class="border border-1 border-gray-300 bg-white rounded-sm p-1 focus:outline-none">
+                        <option value="2">All</option>
+                        <option value="0">Not Complete</option>
+                        <option value="1">Completed</option>
+                    </select>
                 </div>
             </div>
             <div class="mt-5">
-                <div class="mt-1 mb-1"
-                    x-text="getNTodo()==0 ? 'Congrats you finished your list' : getNTodo() + ' more to go!'"></div>
+                <div class="mt-1 mb-1 font-bold"
+                    x-text="getNTodo == 0 ? 'Congrats you finished your list' : getNTodo + ' more to go!'"></div>
                 <div class="flex flex-col gap-4">
                     <template x-for="(todo, index) in todos" :key="index">
-                        <div :id="$id('todo')" x-data="{id: index}"
-                            class="flex border-1 border-gray-300 rounded hover:bg-gray-100 transition">
+                        <div x-bind="isShow" :id="$id('todo')" x-data="{id: index}" :class="todo.isDone ? 'bg-gray-100' : ''"
+                            class="flex border-1 border-gray-300 rounded-lg hover:bg-gray-100 transition">
                             <div class="ml-3 inline-flex items-center content-center">
                                 <label class="flex items-center cursor-pointer relative">
                                     <input :id="id" @click="toggle" type="checkbox" x-model="todo.isDone"
-                                        class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded bg-gray-100 border border-slate-300 checked:bg-transparent checked:border-none" />
+                                        class="peer h-4 w-4 cursor-pointer transition-all appearance-none rounded bg-gray-300 border border-slate-300 checked:bg-transparent checked:border-none" />
                                     <span
                                         class="absolute text-gray-500 opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
                                         <svg width="30px" height="30px" viewBox="0 0 24.00 24.00"
@@ -101,7 +106,6 @@
                                 </label>
                             </div>
                             <label :for="id" x-text="todo.todo" class="flex-1 p-3">
-
                             </label>
                             <div @click="remove" :id="index"
                                 class="flex-none m-1 cursor-pointer text-gray-300 text-xs self-start">
@@ -119,6 +123,7 @@
     <script>
         document.addEventListener('alpine:init', () => {
             Alpine.data('todos', () => ({
+                filter_status: 2,
                 todos: Alpine.$persist([]),
                 add(todo) {
                     this.todos.push({
@@ -134,14 +139,29 @@
                     const index = Number(e.target.id);
                     this.todos[index].isDone = !this.todos[index].isDone;
                 },
-                getNTodo() {
+                get getNTodo() {
                     return this.todos.filter(todo => !todo.isDone).length;
                 },
-                getNTodoDone() {
+                get getNTodoDone() {
                     return this.todos.filter(todo => todo.isDone).length;
                 },
-                isAllCompleted() {
+                get isAllCompleted() {
                     return this.getNTodo() == this.getNTodoDone();
+                },
+                get getFilterStatus(){
+                    return this.filter_status;
+                },
+                trigger: {
+                    ['x-on:change'](e) {
+                        this.filter_status = Number(e.target.value);
+                    },
+                },
+                isShow: {
+                    ['x-show'](){
+                        if(this.filter_status == 2) return true;
+                        if(this.filter_status == 1) return this.todo.isDone;
+                        if(this.filter_status == 0) return !this.todo.isDone;
+                    }
                 }
             }));
         });
